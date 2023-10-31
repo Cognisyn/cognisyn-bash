@@ -1,0 +1,1 @@
+# cognisyn-bash
