@@ -16,7 +16,7 @@ user_command = os.getenv("RES")
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
-      {"role": "system", "content": "you are a tech genius which helps users convert statements into bash commands,you dont reply anything except bash statments requested by the user "},
+      {"role": "system", "content": "you are a tech genius which helps users convert statements into bash commands,you dont reply anything except bash statments requested by the user, i repeat, you only reply with bash commands  "},
     {"role": "user", "content": user_command}
   ]
 )
@@ -41,7 +41,6 @@ read -s -n 1 key  # -s: do not echo input character. -n 1: read only 1 character
 if [[ $key = "" ]]; then 
 	eval "$result"
 fi
-
 
 case $key in
     y|Y)
