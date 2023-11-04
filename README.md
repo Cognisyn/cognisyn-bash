@@ -6,7 +6,7 @@
 Install the project using 
 
 ```bash
-  git clone https://github.com/Cognisyn/cognisyn-bash /bin/ 
+  git clone https://github.com/Cognisyn/cognisyn-bash /bin/cognisyn-bash
 ```
     
 ## Get started 
