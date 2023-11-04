@@ -1,13 +1,30 @@
 #!/bin/bash
 
+api_key=$OPENAI_API_KEY
+
+if [[ -z "$api_key" ]]; then
+    echo "Error : openai api key is required"
+    echo "you can get your api key here : https://platform.openai.com/account/api-keys"
+    echo "add that using export OPENAI_API_KEY='your_api_key'"
+    exit 1
+fi
+
 echo -n "Enter the statement :  "
 read -r ans 
 temp_file=$(mktemp)
 export RES="$ans"
+pip install openai
+
 
 python - << EOF
-
 import os
+import sys 
+
+name = "openai"
+if name not in sys.modules:
+    import pip
+    pip.main(["install", name])
+
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -33,11 +50,7 @@ result=$(cat $temp_file)
 rm $temp_file
 echo "$result"
 echo "Press 'y or ENTER ' to continue or 'n' to exit."
- 
-read -s -n 1 key  # -s: do not echo input character. -n 1: read only 1 character (separate with space)
-
-# double brackets to test, single equals sign, empty string for just 'enter' in this case...
-# if [[ ... ]] is followed by semicolon and 'then' keyword
+read -s -n 1 key
 if [[ $key = "" ]]; then 
 	eval "$result"
 fi
@@ -53,4 +66,14 @@ n|N)
 *)
         ;;
 esac
+
+if grep -q "alias gpt='/home/rufevean/v3code/cognisyn/test.sh'" ~/.bashrc; then
+    echo " "    
+else
+    echo "alias gpt='/home/rufevean/v3code/cognisyn/test.sh'" >> ~/.bashrc 
+    source ~/.bashrc
+    echo "alias added , use 'gpt' to invoke the script "
+fi
+
+
 
