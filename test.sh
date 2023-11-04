@@ -13,17 +13,19 @@ echo -n "Enter the statement :  "
 read -r ans 
 temp_file=$(mktemp)
 export RES="$ans"
-pip install openai
 
 
 python - << EOF
 import os
 import sys 
-
+import subprocess
 name = "openai"
+
 if name not in sys.modules:
-    import pip
-    pip.main(["install", name])
+    try:
+        subprocess.check_call(["python", "-m", "pip", "install", name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing {name}: {e}")
 
 import openai
 
