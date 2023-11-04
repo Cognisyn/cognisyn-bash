@@ -69,12 +69,12 @@ n|N)
         ;;
 esac
 
-if grep -q "alias gpt='/bin/cognisyn-bash/test.sh'" ~/.bashrc; then
+if grep -q "alias cogni='/bin/cognisyn-bash/test.sh'" ~/.bashrc; then
     echo " "    
 else
-    echo "alias gpt='/bin/cognisyn-bash/test.sh'" >> ~/.bashrc 
+    echo "alias cogni='/bin/cognisyn-bash/test.sh'" >> ~/.bashrc 
     source ~/.bashrc
-    echo "alias added , use 'gpt' to invoke the script "
+    echo "alias added , use 'cogni' to invoke the script "
 fi
 
 
