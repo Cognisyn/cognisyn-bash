@@ -6,7 +6,7 @@
 Install the project using 
 
 ```bash
-  git clone https://github.com/Cognisyn/cognisyn-bash /bin/cognisyn-bash
+  sudo git clone https://github.com/Cognisyn/cognisyn-bash /bin/cognisyn-bash
 ```
     
 ## Get started 
@@ -14,7 +14,6 @@ adding alias into bash
 
 ``` bash 
 cd /bin/cognisyn-bash
-chmod +x ./test.sh
 ./test.sh
 
 ```
