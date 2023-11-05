@@ -1,6 +1,7 @@
 # cognisyn-bash
 
-
+## Prerequisites
+Git for linux - https://git-scm.com/download/linux
 ## Installation
 
 Install the project using 
@@ -18,12 +19,6 @@ cd ~/cognisyn-bash
 
 ```
 
-if you get an error -permisson denied
-
-``` bash
-su root
-
-```
 
 
 ### Usage 
