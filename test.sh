@@ -1,18 +1,52 @@
-#!/bin/bash
-
 api_key=$OPENAI_API_KEY
+if [ "$SHELL" = "/bin/bash" ];then
+    if grep -q "alias cogni='~/cognisyn-bash/test.sh'" ~/.bashrc; then
+        echo " "    
+    else
+        echo "alias cogni='~/cognisyn-bash/test.sh'" >> ~/.bashrc 
+        source ~/.bashrc
+        echo "alias added , use 'cogni' to invoke the script "
+    fi
+elif [ "$SHELL" = "/bin/zsh" ];then 
+    if grep -q "alias cogni='~/cognisyn-bash/test.sh'" ~/.zshrc; then
+        echo " "    
+    else
+        echo "alias cogni='~/cognisyn-bash/test.sh'" >> ~/.zshrc 
+        source ~/.zshrc
+        echo "alias added , use 'cogni' to invoke the script "
+    fi
+fi 
 
-if [[ -z "$api_key" ]]; then
-    echo "Error : openai api key is required"
-    echo "you can get your api key here : https://platform.openai.com/account/api-keys"
-    echo "add that using export OPENAI_API_KEY='your_api_key'"
-    exit 1
+
+if [ "$SHELL" = "/bin/bash" ];then
+    if [[ -z "$api_key" ]]; then
+        echo "Error : openai api key is required"
+        echo "you can get your api key here : https://platform.openai.com/account/api-keys"
+        echo -n "Enter Your API KEY here : "
+        read -r key1
+        echo "export OPENAI_API_KEY='$key1'" >> ~/.bashrc 
+        echo "open new terminal after adding your key"
+        source ~/.bashrc 
+        exit 1
+    fi
+
+elif [ "$SHELL" = "/bin/zsh" ];then 
+    if [[ -z "$api_key" ]]; then
+        echo "Error : openai api key is required"
+        echo "you can get your api key here : https://platform.openai.com/account/api-keys"
+        echo -n "Enter Your API KEY here : "
+        read -r key2
+        echo "export OPENAI_API_KEY='$key2'" >> ~/.zshrc 
+        echo "open new terminal after adding your key"
+        source ~/.zshrc 
+        exit 1
+    fi
 fi
-
 echo -n "Enter the statement :  "
 read -r ans 
 temp_file=$(mktemp)
 export RES="$ans"
+
 
 
 python - << EOF
@@ -68,14 +102,4 @@ n|N)
 *)
         ;;
 esac
-
-if grep -q "alias cogni='/bin/cognisyn-bash/test.sh'" ~/.bashrc; then
-    echo " "    
-else
-    echo "alias cogni='/bin/cognisyn-bash/test.sh'" >> ~/.bashrc 
-    source ~/.bashrc
-    echo "alias added , use 'cogni' to invoke the script "
-fi
-
-
 
